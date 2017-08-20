@@ -10,7 +10,8 @@ const getScopedActions = (dispatchProps, resourceName, controller) => {
   const update = (id, attributes) => (
     dispatchProps.update({
       ...baseScoping,
-      id
+      id,
+      attributes
     })
   )
 
@@ -28,16 +29,24 @@ const getScopedActions = (dispatchProps, resourceName, controller) => {
     })
   )
 
-  const fetch = type => queryParams => (
-    dispatchProps[type]({
+  const index = queryParams => (
+    dispatchProps.index({
       ...baseScoping,
       queryParams
     })
   )
 
+  const show = (id, queryParams) => (
+    dispatchProps.show({
+      ...baseScoping,
+      id,
+      queryParams
+    })
+  )
+
   return {
-    index: fetch('index'),
-    show: fetch('show'),
+    index,
+    show,
     create,
     update,
     destroy
