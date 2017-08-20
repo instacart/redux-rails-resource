@@ -80,6 +80,9 @@ const resource = (resourceName, resourceOptions = {}) => {
       throw new Error(`${resourceName} is not registered in rails-redux resource config`)
     }
 
+    if (resourceData.models) {
+      resourceData.models = resourceData.models.map(({attributes, ...meta}) => ({ ...meta, ...attributes }))
+    }
     return resourceData
   }
 

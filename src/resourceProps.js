@@ -12,7 +12,7 @@ const actionProps = {
 const baseProps = {
   ...actionProps,
   loading: PropTypes.bool.isRequired,
-  loadingError: PropTypes.bool
+  loadingError: PropTypes.string
 }
 
 const member = PropTypes.shape({
