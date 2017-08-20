@@ -88,13 +88,16 @@ const resource = (resourceName, resourceOptions = {}) => {
 
   const mapDispatchToProps = railsActions
 
-  const mergeProps = (stateProps, dispatchProps, ownProps) => ({
-    [resourceName]: {
-      ...getScopedActions(stateProps, dispatchProps, resourceName, getController(resourceName, resourceOptions, ownProps)),
-      ...stateProps
-    },
-    ...ownProps
-  })
+  const mergeProps = (stateProps, dispatchProps, ownProps) => {
+    const propWrapper = resourceOptions.propWrapper || resourceName
+    return {
+      [propWrapper]: {
+        ...getScopedActions(stateProps, dispatchProps, resourceName, getController(resourceName, resourceOptions, ownProps)),
+        ...stateProps
+      },
+      ...ownProps
+    }
+  }
 
   return WrappedComponent => {
     class Resource extends Component {

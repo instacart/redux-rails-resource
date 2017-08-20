@@ -13,11 +13,9 @@ Convenient Higher Order Component for React elements utilizing the Redux-Rails m
 #### resourceOptions
 
 - autoload
-  ...
 - queryParams
-  ...
 - control
-  ...
+- propWrapper
 
 ## Examples
 
