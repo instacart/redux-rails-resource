@@ -71,3 +71,35 @@ class UserProfile extends Component {
   }
 }
 ```
+
+#### Paginated React Component
+```javascript
+import { resource, resourceProps } from 'resource-hoc'
+
+@resource('posts', { autoload: true })
+class PaginatedPosts extends Component {
+  static propTypes = {
+    posts: resourceProps.collection
+  }
+
+  handlePageChange = (page) => {
+    this.props.comments.updateFilters({ page })
+  }
+
+  handleFilterSelect = (filter) => {
+    this.props.comments.updateFilters({ [filter]: filter })
+  }
+
+  render() {
+    const { name, company } = this.props.comments.attributes
+
+    return (
+      <div>
+        <PaginationControl onPageChange={this.handlePageChange}
+        <Filters onFilterSelect={this.handleFilterSelect}
+        <PostList posts={this.posts.models} />
+      </div>
+    )
+  }
+}
+```

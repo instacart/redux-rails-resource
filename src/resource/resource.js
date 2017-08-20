@@ -1,7 +1,7 @@
 import { connect }      from 'react-redux'
 import { railsActions } from 'redux-rails'
 
-const getScopedActions = (dispatchProps, resourceName, controller) => {
+const getScopedActions = (stateProps, dispatchProps, resourceName, controller) => {
   const baseScoping = {
     resource: resourceName,
     controller
@@ -16,14 +16,14 @@ const getScopedActions = (dispatchProps, resourceName, controller) => {
   )
 
   const create = attributes => (
-    dispatchProps.update({
+    dispatchProps.create({
       ...baseScoping,
       attributes
     })
   )
 
   const destroy = id => (
-    dispatchProps.update({
+    dispatchProps.destroy({
       ...baseScoping,
       id
     })
@@ -44,12 +44,24 @@ const getScopedActions = (dispatchProps, resourceName, controller) => {
     })
   )
 
+  const lastQueryParam = stateProps.queryParams || {}
+  const updateFilters = (queryParams) => {
+    dispatchProps.index({
+      ...baseScoping,
+      queryParams: {
+        ...lastQueryParam
+        ...queryParams
+      }
+    })
+  }
+
   return {
     index,
     show,
     create,
     update,
-    destroy
+    destroy,
+    updateFilters
   }
 }
 
@@ -73,7 +85,7 @@ const resource = (resourceName, resourceOptions = {}) => {
 
   const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     [resourceName]: {
-      ...getScopedActions(dispatchProps, resourceName, getController(resourceName, resourceOptions, ownProps)),
+      ...getScopedActions(stateProps, dispatchProps, resourceName, getController(resourceName, resourceOptions, ownProps)),
       ...stateProps
     },
     ...ownProps
