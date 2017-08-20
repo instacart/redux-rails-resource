@@ -10,9 +10,9 @@ const actionProps = {
 }
 
 const baseProps = {
-  ...actionProps
+  ...actionProps,
   loading: PropTypes.bool.isRequired,
-  loadingError: PropTypes.bool,
+  loadingError: PropTypes.bool
 }
 
 const member = {
@@ -23,7 +23,7 @@ const member = {
 
 const collection = {
   ...baseProps,
-  models: PropTypes.arrayOf(memberProps)
+  models: PropTypes.arrayOf(member)
 }
 
 export default {

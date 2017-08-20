@@ -24,7 +24,8 @@ module.exports = {
   externals: {
     'react': 'react',
     'react-redux': 'react-redux',
-    'prop-types': 'prop-types'
+    'prop-types': 'prop-types',
+    'redux-rails': 'redux-rails'
   },
   devtool: "cheap-module-eval-source-map"
 }
