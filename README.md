@@ -103,3 +103,21 @@ class PaginatedPosts extends Component {
   }
 }
 ```
+
+## Actions
+Wrapping a component in `resource` will pass down 5 functions: `index`, `update`, `create`, `destroy`, and `updateFilters`.
+
+### index
+`index(queryParams: object)`
+
+### update
+`update(id: number, queryParams: object)`
+
+### create
+`update(objectAttributes: object)`
+
+### destroy
+`destroy(id: number)`
+
+### updateFilters
+`updateFilters(partialQueryParams: object)`

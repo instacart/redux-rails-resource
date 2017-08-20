@@ -38,7 +38,7 @@ describe('resouce', () => {
   })
 
   it('pass down scoped rails actions', () => {
-    const propKeys = ['index', 'update', 'create', 'destroy']
+    const propKeys = ['index', 'update', 'create', 'destroy', 'updateFilters']
     const expectedKeys = expect.arrayContaining(propKeys)
     expect(Object.keys(resourceProps)).toEqual(expectedKeys)
   })
