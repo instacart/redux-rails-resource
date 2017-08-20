@@ -17,10 +17,14 @@ class CommentSection extends Component {
   }
 
   componentDidMount() {
+    // GET request to /comments?deleted=false
+    // Stores the result in redux and updates this component's models
     this.props.comments.index({ queryParams: { deleted: false } })
   }
 
   handleCreate = (commentAttributes) => {
+    // POST request to /comments
+    // The body of the post request will be JSON string of commentAttributes
     this.props.comments.create(commentAttributes)
   }
 
@@ -50,6 +54,8 @@ class UserProfile extends Component {
   handleChangeName = (name) => {
     const { id } = this.comments.attributes
 
+    // PUT request to /comments/:id
+    // Second argument will be body of post request
     this.props.comments.update(id, { name })
   }
 
