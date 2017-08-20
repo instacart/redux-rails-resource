@@ -15,16 +15,16 @@ const baseProps = {
   loadingError: PropTypes.bool
 }
 
-const member = {
-  ...baseProps,
-  id: PropTypes.number,
-  attributes: PropTypes.object
-}
+const member = PropTypes.shape({
+    ...baseProps,
+    id: PropTypes.number,
+    attributes: PropTypes.object
+  })
 
-const collection = {
+const collection = PropTypes.shape({
   ...baseProps,
   models: PropTypes.arrayOf(member)
-}
+})
 
 export default {
   member,
