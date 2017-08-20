@@ -1,9 +1,9 @@
 import { connect }      from 'react-redux'
 import { railsActions } from 'redux-rails'
 
-const getScopedActions = (dispatchProps, controller) => {
+const getScopedActions = (dispatchProps, resourceName, controller) => {
   const baseScoping = {
-    resource: controller,
+    resource: resourceName,
     controller
   }
 
@@ -44,7 +44,13 @@ const getScopedActions = (dispatchProps, controller) => {
   }
 }
 
-const resource = (resourceName, resourceOptions) => {
+const getController = (resourceName, { controller }, ownProps) => {
+  if (!controller) { return resourceName }
+  if (typeof controller === 'function') { return controller(ownProps) }
+  return controller
+}
+
+const resource = (resourceName, resourceOptions = {}) => {
   const mapStateToProps = (state) => {
     const resourceData = state.resources[resourceName]
     if (!resourceData) {
@@ -58,7 +64,7 @@ const resource = (resourceName, resourceOptions) => {
 
   const mergeProps = (stateProps, dispatchProps, ownProps) => ({
     [resourceName]: {
-      ...getScopedActions(dispatchProps, resourceName),
+      ...getScopedActions(dispatchProps, resourceName, getController(resourceName, resourceOptions, ownProps)),
       ...stateProps
     },
     ...ownProps
