@@ -1,5 +1,7 @@
 import { connect }      from 'react-redux'
 import { railsActions } from 'redux-rails'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 const getScopedActions = (stateProps, dispatchProps, resourceName, controller) => {
   const baseScoping = {
@@ -91,10 +93,30 @@ const resource = (resourceName, resourceOptions = {}) => {
     ...ownProps
   })
 
+  return WrappedComponent => {
+    class Resource extends Component {
+      componentDidMount() {
+        if(resourceOptions.autoload) {
+          // Defer execution to allow component to be painted and rendered
+          setTimeout(() => {
+            this.props[resourceName].index(resourceOptions.queryParams)
+          }, 0)
+        }
+      }
 
-  return WrappedComponent => (
-    connect(mapStateToProps, mapDispatchToProps, mergeProps)(WrappedComponent)
-  )
+      render() {
+        return <WrappedComponent {...this.props} />
+      }
+    }
+
+    const connectedComponent = connect(mapStateToProps, mapDispatchToProps, mergeProps)(Resource)
+
+    connectedComponent.WrappedComponent = WrappedComponent.WrappedComponent
+      ? WrappedComponent.WrappedComponent
+      : WrappedComponent
+
+    return connectedComponent
+  }
 }
 
 export default resource
