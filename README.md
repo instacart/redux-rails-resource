@@ -16,6 +16,7 @@ Convenient Higher Order Component for React elements utilizing the Redux-Rails m
 - queryParams
 - control
 - propWrapper
+- onlyActions
 
 ## Examples
 

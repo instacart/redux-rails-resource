@@ -74,6 +74,7 @@ const getController = (resourceName, { controller }, ownProps) => {
 }
 
 const resource = (resourceName, resourceOptions = {}) => {
+  const { onlyActions } = resourceOptions
   const mapStateToProps = (state) => {
     const resourceData = state.resources[resourceName]
     if (!resourceData) {
@@ -88,7 +89,7 @@ const resource = (resourceName, resourceOptions = {}) => {
 
   const mapDispatchToProps = railsActions
 
-  const mergeProps = (stateProps, dispatchProps, ownProps) => {
+  const mergeProps = (stateProps = {}, dispatchProps, ownProps) => {
     const propWrapper = resourceOptions.propWrapper || resourceName
     return {
       [propWrapper]: {
@@ -115,7 +116,7 @@ const resource = (resourceName, resourceOptions = {}) => {
       }
     }
 
-    const connectedComponent = connect(mapStateToProps, mapDispatchToProps, mergeProps)(Resource)
+    const connectedComponent = connect(onlyActions ? mapStateToProps : null, mapDispatchToProps, mergeProps)(Resource)
 
     connectedComponent.WrappedComponent = WrappedComponent.WrappedComponent
       ? WrappedComponent.WrappedComponent
