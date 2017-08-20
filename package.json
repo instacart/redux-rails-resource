@@ -6,7 +6,8 @@
   "author": "James Jalandoni <james.jalandoni@instacart.com>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --progress --config webpack.config.js src/index.js dist/resource-hoc.js"
+    "build": "webpack --progress --config webpack.config.js src/index.js dist/resource-hoc.js",
+    "test": "jest --coverage --silent"
   },
   "peerDependencies": {
     "prop-types": "^15.5.10",
