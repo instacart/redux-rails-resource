@@ -10,9 +10,17 @@ const SampleComponent = () => {
 
 const renderComponent = (name) => {
   const WrappedComponent = resource(name)(SampleComponent)
+  const baseCollectionState = {
+    loading: false,
+    loadingError: null,
+    models: []
+  }
+
   return mount(
     <Provider store={createStore(state => state,{ resources: {
-      items: {}
+      items: {
+        ...baseCollectionState
+      }
     } })}>
       <WrappedComponent />
     </Provider>
@@ -30,7 +38,14 @@ describe('resouce', () => {
   })
 
   it('pass down scoped rails actions', () => {
-    const expectedKeys = expect.arrayContaining(['index', 'update', 'create', 'destroy'])
+    const propKeys = ['index', 'update', 'create', 'destroy']
+    const expectedKeys = expect.arrayContaining(propKeys)
+    expect(Object.keys(resourceProps)).toEqual(expectedKeys)
+  })
+
+  it('pass down resource redux state', () => {
+    const propKeys = ['loading', 'loadingError', 'models']
+    const expectedKeys = expect.arrayContaining(propKeys)
     expect(Object.keys(resourceProps)).toEqual(expectedKeys)
   })
 })

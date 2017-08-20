@@ -49,7 +49,7 @@ const getScopedActions = (stateProps, dispatchProps, resourceName, controller) =
     dispatchProps.index({
       ...baseScoping,
       queryParams: {
-        ...lastQueryParam
+        ...lastQueryParam,
         ...queryParams
       }
     })
