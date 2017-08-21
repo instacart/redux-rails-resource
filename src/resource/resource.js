@@ -41,7 +41,7 @@ function resource (resourceName, {
   const mergeProps = (stateProps = {}, dispatchProps, ownProps) => {
     const propWrapper = defaultPropWrapper || resourceName
     const controller = getController(resourceName, defaultController, ownProps)
-    const scopedActions = scopeRailsActions({stateProps, dispatchProps, resourceName, controller})
+    const scopedActions = scopeRailsActions({stateProps, dispatchProps, resource: resourceName, controller})
 
     return {
       [propWrapper]: {

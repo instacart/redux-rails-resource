@@ -35,7 +35,7 @@ const destroy = ({ dispatchProps, baseScoping }) => id => (
   })
 )
 
-const updateFilters = ({ stateProps, dispatchProps, baseScoping }) => (queryParams) => {
+const updateFilters = ({ stateProps = {}, dispatchProps, baseScoping }) => (queryParams) => {
   const lastQueryParam = stateProps.queryParams || {}
 
   return dispatchProps.index({
@@ -47,19 +47,19 @@ const updateFilters = ({ stateProps, dispatchProps, baseScoping }) => (queryPara
   })
 }
 
-const scopeRailsActions = ({ stateProps, dispatchProps, resourceName, controller }) => {
+const scopeRailsActions = ({ stateProps, dispatchProps, resource, controller }) => {
   const baseScoping = {
-    resource: resourceName,
+    resource,
     controller
   }
 
   return {
     index: index({ baseScoping, dispatchProps }),
-    show: show({ stateProps, dispatchProps, resourceName, controller }),
-    create: create({stateProps, dispatchProps, resourceName, controller}),
-    update: update({stateProps, dispatchProps, resourceName, controller}),
-    destroy: destroy({stateProps, dispatchProps, resourceName, controller}),
-    updateFilters: updateFilters({stateProps, dispatchProps, resourceName, controller})
+    show: show({ baseScoping, dispatchProps }),
+    create: create({ baseScoping, dispatchProps }),
+    update: update({ baseScoping, dispatchProps }),
+    destroy: destroy({ baseScoping, dispatchProps }),
+    updateFilters: updateFilters({ stateProps, baseScoping, dispatchProps })
   }
 }
 
