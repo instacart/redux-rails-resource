@@ -14,7 +14,7 @@ const getController = (resourceName, defaultController, ownProps) => {
  * Passes down a single prop which name spaces the corresponding state
  * and scoped actions.
  *
- * @param {string} resourceName - The key of the corresponding resource in the redux state. .
+ * @param {string} resourceName - The key of the corresponding resource in the redux state.
  * @param {object} options - Configs, all are optional
  */
 function resource (resourceName, {
