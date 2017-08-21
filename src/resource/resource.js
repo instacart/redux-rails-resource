@@ -1,7 +1,6 @@
 import { connect }      from 'react-redux'
 import { railsActions } from 'redux-rails'
 import React, { Component } from 'react'
-
 import scopeRailsActions from './scopeRailsActions'
 
 const getController = (resourceName, defaultController, ownProps) => {
@@ -42,7 +41,7 @@ function resource (resourceName, {
   const mergeProps = (stateProps = {}, dispatchProps, ownProps) => {
     const propWrapper = defaultPropWrapper || resourceName
     const controller = getController(resourceName, defaultController, ownProps)
-    const scopedActions = scopeRailsActions(stateProps, dispatchProps, resourceName, controller)
+    const scopedActions = scopeRailsActions({stateProps, dispatchProps, resourceName, controller})
 
     return {
       [propWrapper]: {

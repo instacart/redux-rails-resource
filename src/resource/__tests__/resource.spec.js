@@ -8,20 +8,25 @@ const SampleComponent = () => {
   return <div>Test</div>
 }
 
+const baseCollectionState = {
+  loading: false,
+  loadingError: null,
+  models: []
+}
+
 const renderComponent = (name) => {
   const WrappedComponent = resource(name)(SampleComponent)
-  const baseCollectionState = {
-    loading: false,
-    loadingError: null,
-    models: []
-  }
 
-  return mount(
-    <Provider store={createStore(state => state,{ resources: {
+  const startingState = {
+    resources: {
       items: {
         ...baseCollectionState
       }
-    } })}>
+    }
+  }
+  const store = createStore(state => state, startingState)
+  return mount(
+    <Provider store={store} >
       <WrappedComponent />
     </Provider>
   )
@@ -44,7 +49,7 @@ describe('resouce', () => {
   })
 
   it('pass down resource redux state', () => {
-    const propKeys = ['loading', 'loadingError', 'models']
+    const propKeys = Object.keys(baseCollectionState)
     const expectedKeys = expect.arrayContaining(propKeys)
     expect(Object.keys(resourceProps)).toEqual(expectedKeys)
   })
