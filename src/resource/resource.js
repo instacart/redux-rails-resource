@@ -1,79 +1,30 @@
 import { connect }      from 'react-redux'
 import { railsActions } from 'redux-rails'
-import { Component } from 'react'
+import React, { Component } from 'react'
 
-const getScopedActions = (stateProps, dispatchProps, resourceName, controller) => {
-  const baseScoping = {
-    resource: resourceName,
-    controller
-  }
+import scopeRailsActions from './scopeRailsActions'
 
-  const update = (id, attributes) => (
-    dispatchProps.update({
-      ...baseScoping,
-      id,
-      attributes
-    })
-  )
-
-  const create = attributes => (
-    dispatchProps.create({
-      ...baseScoping,
-      attributes
-    })
-  )
-
-  const destroy = id => (
-    dispatchProps.destroy({
-      ...baseScoping,
-      id
-    })
-  )
-
-  const index = queryParams => (
-    dispatchProps.index({
-      ...baseScoping,
-      queryParams
-    })
-  )
-
-  const show = (id, queryParams) => (
-    dispatchProps.show({
-      ...baseScoping,
-      id,
-      queryParams
-    })
-  )
-
-  const lastQueryParam = stateProps.queryParams || {}
-  const updateFilters = (queryParams) => {
-    dispatchProps.index({
-      ...baseScoping,
-      queryParams: {
-        ...lastQueryParam,
-        ...queryParams
-      }
-    })
-  }
-
-  return {
-    index,
-    show,
-    create,
-    update,
-    destroy,
-    updateFilters
-  }
+const getController = (resourceName, defaultController, ownProps) => {
+  if (!defaultController) { return resourceName }
+  if (typeof defaultController === 'function') { return defaultController(ownProps) }
+  return defaultController
 }
 
-const getController = (resourceName, { controller }, ownProps) => {
-  if (!controller) { return resourceName }
-  if (typeof controller === 'function') { return controller(ownProps) }
-  return controller
-}
-
-const resource = (resourceName, resourceOptions = {}) => {
-  const { onlyActions } = resourceOptions
+/**
+ * Higher order component meant to wrap a react component.
+ * Passes down a single prop which name spaces the corresponding state
+ * and scoped actions.
+ *
+ * @param {string} resourceName - The key of the corresponding resource in the redux state. .
+ * @param {object} options - Configs, all are optional
+ */
+function resource (resourceName, {
+  autoload,
+  queryParams: initialQueryParams,
+  onlyActions,
+  propWrapper: defaultPropWrapper,
+  controller: defaultController
+} = {}) {
   const mapStateToProps = (state) => {
     const resourceData = state.resources[resourceName]
     if (!resourceData) {
@@ -89,11 +40,14 @@ const resource = (resourceName, resourceOptions = {}) => {
   const mapDispatchToProps = railsActions
 
   const mergeProps = (stateProps = {}, dispatchProps, ownProps) => {
-    const propWrapper = resourceOptions.propWrapper || resourceName
+    const propWrapper = defaultPropWrapper || resourceName
+    const controller = getController(resourceName, defaultController, ownProps)
+    const scopedActions = scopeRailsActions(stateProps, dispatchProps, resourceName, controller)
+
     return {
       [propWrapper]: {
-        ...getScopedActions(stateProps, dispatchProps, resourceName, getController(resourceName, resourceOptions, ownProps)),
-        ...stateProps
+        ...stateProps,
+        ...scopedActions
       },
       ...ownProps
     }
@@ -102,10 +56,10 @@ const resource = (resourceName, resourceOptions = {}) => {
   return WrappedComponent => {
     class Resource extends Component {
       componentDidMount() {
-        if(resourceOptions.autoload) {
-          // Defer execution to allow component to be painted and rendered
+        if(autoload) {
+          // Defer execution to allow component to be rendered while action is dispatched
           setTimeout(() => {
-            this.props[resourceName].index(resourceOptions.queryParams)
+            this.props[resourceName].index(initialQueryParams)
           }, 0)
         }
       }
@@ -115,13 +69,17 @@ const resource = (resourceName, resourceOptions = {}) => {
       }
     }
 
-    const connectedComponent = connect(onlyActions ? mapStateToProps : null, mapDispatchToProps, mergeProps)(Resource)
+    const ConnectedComponent = connect(
+      onlyActions ? null : mapStateToProps,
+      mapDispatchToProps,
+      mergeProps
+    )(Resource)
 
-    connectedComponent.WrappedComponent = WrappedComponent.WrappedComponent
+    ConnectedComponent.WrappedComponent = WrappedComponent.WrappedComponent
       ? WrappedComponent.WrappedComponent
       : WrappedComponent
 
-    return connectedComponent
+    return ConnectedComponent
   }
 }
 
