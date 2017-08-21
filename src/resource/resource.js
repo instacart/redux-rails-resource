@@ -1,7 +1,6 @@
 import { connect }      from 'react-redux'
 import { railsActions } from 'redux-rails'
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import { Component } from 'react'
 
 const getScopedActions = (stateProps, dispatchProps, resourceName, controller) => {
   const baseScoping = {

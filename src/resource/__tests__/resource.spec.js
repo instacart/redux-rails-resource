@@ -1,7 +1,5 @@
 import { mount } from 'enzyme'
 import resource from '../resource'
-import React from 'react'
-import { Provider }  from 'react-redux'
 import { createStore } from 'redux'
 
 const SampleComponent = () => {

@@ -16,10 +16,10 @@ const baseProps = {
 }
 
 const member = PropTypes.shape({
-    ...baseProps,
-    id: PropTypes.number,
-    attributes: PropTypes.object
-  })
+  ...baseProps,
+  id: PropTypes.number,
+  attributes: PropTypes.object
+})
 
 const collection = PropTypes.shape({
   ...baseProps,

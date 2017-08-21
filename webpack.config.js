@@ -1,6 +1,5 @@
-
-const path = require('path');
-const webpack = require("webpack");
+const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
   module: {
@@ -9,13 +8,13 @@ module.exports = {
    ]
   },
   entry: {
-    main: "./src/index.js"
+    main: './src/index.js'
   },
   resolve: {
     alias: {
-      "redux-rails": path.resolve(__dirname, "lib/redux-rails")
+      'redux-rails': path.resolve(__dirname, 'lib/redux-rails')
     },
-    modules: ["node_modules"]
+    modules: ['node_modules']
   },
   output: {
     library: 'resource-hoc',
@@ -27,5 +26,5 @@ module.exports = {
     'prop-types': 'prop-types',
     'redux-rails': 'redux-rails'
   },
-  devtool: "cheap-module-eval-source-map"
+  devtool: 'cheap-module-eval-source-map'
 }
