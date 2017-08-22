@@ -53,7 +53,12 @@ function resource (resourceName, {
   }
 
   return WrappedComponent => {
+
     class Resource extends Component {
+      static WrappedComponent = WrappedComponent.WrappedComponent
+        ? WrappedComponent.WrappedComponent
+        : WrappedComponent
+
       componentDidMount() {
         if(autoload) {
           // Defer execution to allow component to be rendered while action is dispatched
@@ -68,17 +73,11 @@ function resource (resourceName, {
       }
     }
 
-    const ConnectedComponent = connect(
+    return connect(
       onlyActions ? null : mapStateToProps,
       mapDispatchToProps,
       mergeProps
     )(Resource)
-
-    ConnectedComponent.WrappedComponent = WrappedComponent.WrappedComponent
-      ? WrappedComponent.WrappedComponent
-      : WrappedComponent
-
-    return ConnectedComponent
   }
 }
 
