@@ -15,19 +15,15 @@ const baseProps = {
   loadingError: PropTypes.string
 }
 
-const baseMember = {
-  id: PropTypes.number,
-  attributes: PropTypes.object
-}
-
 const member = PropTypes.shape({
   ...baseProps,
-  ...baseMember
+  id: PropTypes.number,
+  attributes: PropTypes.object
 })
 
 const collection = PropTypes.shape({
   ...baseProps,
-  models: PropTypes.arrayOf(PropTypes.shape(baseMember))
+  models: PropTypes.array
 })
 
 export default {

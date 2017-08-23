@@ -24,16 +24,26 @@ function resource (resourceName, {
   propWrapper: defaultPropWrapper,
   controller: defaultController
 } = {}) {
-  const mapStateToProps = (state) => {
-    const resourceData = state.resources[resourceName]
-    if (!resourceData) {
-      throw new Error(`${resourceName} is not registered in rails-redux resource config`)
-    }
+  const mapStateToProps = () => {
+    let lastResourceData
+    let lastResult
+    
+    return (state) => {
+      const resourceData =  state.resources[resourceName]
+      if (lastResourceData === resourceData) { return lastResult }
 
-    if (resourceData.models) {
-      resourceData.models = resourceData.models.map(({attributes, ...meta}) => ({ ...meta, ...attributes }))
+      if (!resourceData) {
+        throw new Error(`${resourceName} is not registered in rails-redux resource config`)
+      }
+      lastResourceData = resourceData
+      lastResult = { ...resourceData }
+
+      if (lastResult.models) {
+        lastResult.models = resourceData.models.map(({attributes, ...meta}) => ({ ...meta, ...attributes }))
+      }
+
+      return lastResult
     }
-    return resourceData
   }
 
   const mapDispatchToProps = railsActions
