@@ -6,7 +6,7 @@
   "author": "James Jalandoni <james.jalandoni@instacart.com>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --progress --config webpack.config.js src/index.js dist/redux-rails-resource.js",
+    "build": "webpack --progress --config webpack.config.js",
     "test": "jest --coverage --silent"
   },
   "peerDependencies": {
@@ -40,7 +40,8 @@
     "react-test-renderer": "^16.5.2",
     "redux": "^3.7.2",
     "sinon": "^6.3.4",
-    "webpack": "^3.5.5"
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.0"
   },
   "jest": {
     "moduleFileExtensions": [

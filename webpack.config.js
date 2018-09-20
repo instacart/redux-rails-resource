@@ -1,6 +1,7 @@
 module.exports = {
+  mode: 'production',
   module: {
-    loaders: [
+    rules: [
       { test: /\.js$/, loaders: ['babel-loader'], exclude: /node_modules/ }
     ]
   },
@@ -21,6 +22,5 @@ module.exports = {
     'react-redux': 'react-redux',
     'prop-types': 'prop-types',
     'redux-rails': 'redux-rails'
-  },
-  devtool: 'cheap-module-eval-source-map'
+  }
 }
