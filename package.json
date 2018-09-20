@@ -4,7 +4,7 @@
   "description": "Convenient Higher Order Component for React elements utilizing the Redux-Rails middleware",
   "main": "src/index.js",
   "author": "James Jalandoni <james.jalandoni@instacart.com>",
-  "license": "MIT",
+  "license": "Apache-2.0",
   "scripts": {
     "build": "webpack --progress --config webpack.config.js",
     "test": "jest --coverage --silent"
