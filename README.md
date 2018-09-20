@@ -1,7 +1,9 @@
 [redux-rails-resource](https://instacart.github.io/redux-rails-resource/)
 =========================
 
-Convenient Higher Order Component for React elements utilizing [the Redux-Rails middleware](https://github.com/instacart/redux-rails/)
+<strong>Convenient Higher Order Component for React elements utilizing [the Redux-Rails middleware](https://github.com/instacart/redux-rails/)</strong>
+
+[![CircleCI](https://circleci.com/gh/instacart/Snacks.svg?style=shield)](https://circleci.com/gh/instacart/redux-rails-resource)
 ## Usage
 `resource(resourceName: string, resourceOptions: object)(CustomComponent: ReactComponent)`
 
