@@ -1,6 +1,3 @@
-const path = require('path')
-const webpack = require('webpack')
-
 module.exports = {
   module: {
     loaders: [
@@ -11,14 +8,13 @@ module.exports = {
     main: './src/index.js'
   },
   resolve: {
-    alias: {
-      'redux-rails': path.resolve(__dirname, 'lib/redux-rails')
-    },
     modules: ['node_modules']
   },
   output: {
-    library: 'resource-hoc',
-    libraryTarget: 'umd'
+    filename: 'redux-rails-resource.js',
+    library: 'redux-rails-resource',
+    libraryTarget: 'umd',
+    globalObject: 'typeof self !== \'undefined\' ? self : this'
   },
   externals: {
     'react': 'react',
