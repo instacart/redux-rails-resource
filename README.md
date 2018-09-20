@@ -4,6 +4,30 @@
 <strong>Convenient Higher Order Component for React elements utilizing [the Redux-Rails middleware](https://github.com/instacart/redux-rails/)</strong>
 
 [![CircleCI](https://circleci.com/gh/instacart/Snacks.svg?style=shield)](https://circleci.com/gh/instacart/redux-rails-resource)
+
+## Installation
+You can use either `yarn` or `npm` to install redux-rails-resource and its dependencies.
+
+### with yarn
+```sh
+yarn add 'redux-rails-resource'
+```
+
+### with npm
+```sh
+npm install 'redux-rails-resource'
+```
+### Installing peer dependencies
+redux-rails-resource has a few peer dependencies required to use the library.
+> If you already have these libraries listed in your app's dependencies, there's no need to install them again.
+
+- prop-types v15 or v16
+- react v15 or v16
+- react-redux 5.0.0+
+- redux 3.7.0+
+- redux-rails: 1.0.0+
+
+
 ## Usage
 `resource(resourceName: string, resourceOptions: object)(CustomComponent: ReactComponent)`
 
