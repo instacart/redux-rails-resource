@@ -1,7 +1,7 @@
 [redux-rails-resource](https://instacart.github.io/redux-rails-resource/)
 =========================
 
-Convenient Higher Order Component for React elements utilizing the Redux-Rails middleware
+Convenient Higher Order Component for React elements utilizing [the Redux-Rails middleware](https://github.com/instacart/redux-rails/)
 ## Usage
 `resource(resourceName: string, resourceOptions: object)(CustomComponent: ReactComponent)`
 
