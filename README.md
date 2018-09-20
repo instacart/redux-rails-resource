@@ -1,7 +1,5 @@
-[resource-hoc](https://instacart.github.io/Snacks/)
+[redux-rails-resource](https://instacart.github.io/redux-rails-resource/)
 =========================
-[![license](https://img.shields.io/npm/l/ic-snacks.svg?style=flat-square)](https://github.com/instacart/Snacks/blob/master/LICENSE)
-[![CircleCI](https://circleci.com/gh/instacart/resource-hoc.svg?style=shield&circle-token=6636e6a2f92ba1b5d0dbfd048f1690da7495e5bf)](https://circleci.com/gh/instacart/resource-hoc)
 
 Convenient Higher Order Component for React elements utilizing the Redux-Rails middleware
 ## Usage
@@ -34,7 +32,7 @@ the `resource` hoc to the wrapped component.
 
 #### Collection React Component
 ```javascript
-import { resource, resourceProps } from 'resource-hoc'
+import { resource, resourceProps } from 'redux-rails-resource'
 
 @resource('comments')
 class CommentSection extends Component {
@@ -69,7 +67,7 @@ class CommentSection extends Component {
 
 #### Member React Component
 ```javascript
-import { resource, resourceProps } from 'resource-hoc'
+import { resource, resourceProps } from 'redux-rails-resource'
 
 @resource('user')
 class UserProfile extends Component {
@@ -100,7 +98,7 @@ class UserProfile extends Component {
 
 #### Paginated React Component
 ```javascript
-import { resource, resourceProps } from 'resource-hoc'
+import { resource, resourceProps } from 'redux-rails-resource'
 
 @resource('posts', { autoload: true })
 class PaginatedPosts extends Component {

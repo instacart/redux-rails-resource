@@ -1,4 +1,4 @@
-import { connect }      from 'react-redux'
+import { connect } from 'react-redux'
 import { railsActions } from 'redux-rails'
 import React, { Component } from 'react'
 import scopeRailsActions from './scopeRailsActions'

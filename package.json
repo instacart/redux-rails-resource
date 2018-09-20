@@ -1,19 +1,20 @@
 {
-  "name": "resource-hoc",
-  "version": "0.0.1",
+  "name": "redux-rails-resource",
+  "version": "1.0.0",
   "description": "Convenient Higher Order Component for React elements utilizing the Redux-Rails middleware",
   "main": "src/index.js",
   "author": "James Jalandoni <james.jalandoni@instacart.com>",
   "license": "MIT",
   "scripts": {
-    "build": "webpack --progress --config webpack.config.js src/index.js dist/resource-hoc.js",
+    "build": "webpack --progress --config webpack.config.js src/index.js dist/redux-rails-resource.js",
     "test": "jest --coverage --silent"
   },
   "peerDependencies": {
-    "prop-types": "^15.5.10",
-    "react": "^15.6.1",
-    "react-redux": "^5.0.6",
-    "redux": "^3.7.2"
+    "prop-types": "^15.0.0 || ^16.0.0",
+    "react": "^15.0.0 || ^16.0.0",
+    "react-redux": ">5.0.0",
+    "redux": ">3.7.0",
+    "redux-rails": "^1.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
@@ -26,16 +27,17 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "enzyme": "^2.9.1",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
     "eslint": "^4.5.0",
     "eslint-plugin-jest": "^20.0.3",
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.2.1",
-    "jest": "^20.0.4",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "jest": "^23.6.0",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
     "react-redux": "^5.0.6",
-    "react-test-renderer": "^15.6.1",
+    "react-test-renderer": "^16.5.2",
     "redux": "^3.7.2",
     "sinon": "^3.2.1",
     "webpack": "^3.5.5"
@@ -48,9 +50,6 @@
       "node_modules",
       "lib"
     ],
-    "moduleNameMapper": {
-      "^redux-rail(.*)$": "<rootDir>/lib/redux-rail.js",
-      "^react(.*)$": "<rootDir>/node_modules/react.js"
-    }
+    "setupTestFrameworkScriptFile": "<rootDir>/scripts/testSetup.js"
   }
 }
