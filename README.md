@@ -172,3 +172,4 @@ The `resource` hoc will pass down 5 functions as top level keys in the prop pass
 
 updateFilter will merge the existing queryParams of the corresponding resource with
 the `partialQueryParams` argument.
+test
